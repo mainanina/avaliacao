@@ -21,8 +21,9 @@ public class AlunoService {
         AlunoEntity entity = new AlunoEntity();
 
         List<AlunoEntity> cpfs = alunoRepository.findByCpf(aluno.getCpf());
+        System.out.println(cpfs);
 
-        if (cpfs != null){
+        if (cpfs.size()==0){
             entity.setNomeAluno(aluno.getNome());
             entity.setCpf(aluno.getCpf());
             entity = alunoRepository.save(entity);
