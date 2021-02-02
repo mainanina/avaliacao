@@ -8,7 +8,9 @@ import com.rd.treinamentodev.AvaliacaoSpringBoot.model.entity.AlunoEntity;
 import com.rd.treinamentodev.AvaliacaoSpringBoot.model.entity.CursoEntity;
 import com.rd.treinamentodev.AvaliacaoSpringBoot.model.entity.InstrutorEntity;
 import com.rd.treinamentodev.AvaliacaoSpringBoot.model.entity.TurmaEntity;
+import com.rd.treinamentodev.AvaliacaoSpringBoot.repository.AlunoRepository;
 import com.rd.treinamentodev.AvaliacaoSpringBoot.repository.CursoRepository;
+import com.rd.treinamentodev.AvaliacaoSpringBoot.repository.InstrutorRepository;
 import com.rd.treinamentodev.AvaliacaoSpringBoot.repository.TurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,12 @@ public class TurmaService {
     private TurmaRepository turmaRepository;
 
     @Autowired
+    private InstrutorRepository instrutorRepository;
+
+    @Autowired
+    private AlunoRepository alunoRepository;
+
+    @Autowired
     private CursoRepository cursoRepository;
 
     SimpleDateFormat SDF = new SimpleDateFormat("dd/MM/yyyy");
@@ -37,9 +45,10 @@ public class TurmaService {
             CursoDTO cursoDTO = new CursoDTO();
             CursoEntity cursoEntity = new CursoEntity();
             cursoDTO.setNome(cursoEntity.getNomeCurso());
+
             turmaDTO.setCurso(cursoDTO);
-            turmaDTO.setDtInicio(turmaDTO.getDtInicio());
-            turmaDTO.setDtFim(turmaDTO.getDtFim());
+            turmaDTO.setDtInicio(turmaEntity.getDtInicio().toString());
+            turmaDTO.setDtFim(turmaEntity.getDtFinal().toString());
 
             List<InstrutorEntity> instrutoresEntity = turmaEntity.getInstrutores();
 
